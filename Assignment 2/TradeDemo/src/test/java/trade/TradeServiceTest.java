@@ -41,6 +41,7 @@ public class TradeServiceTest {
 
 
 
+
     @Test
     public void getTradeRegionShouldBeTrue() {
 
@@ -76,7 +77,7 @@ public class TradeServiceTest {
 
 
         Mockito.when(regionalDaoManager.getRegionalDao(Region.TOKYO)).thenReturn(new TokyoDao());
-        Mockito.when(regionalDao.getDataSource().getConnection()).thenReturn(Mockito.any());
+//        Mockito.when(regionalDao.getDataSource().getConnection()).thenReturn(Mockito.any());
 
 
         Mockito.when(regionalDao.getTradeDetails(123456789)).thenReturn(new TradeDetails(12345678,Region.TOKYO,1));
@@ -94,5 +95,22 @@ public class TradeServiceTest {
 
 
     }
+
+
+    @Test
+    public void getTradeDetailsShouldThrowException() {
+        Mockito.when(regionalDao.getTradeDetails(Mockito.anyLong())).thenThrow(RuntimeException.class);
+        assertThrows(RuntimeException.class, () -> regionalDao.getTradeDetails(12890123));
+    }
+
+
+    @Test
+    public void getTradeDetailsShouldBeNotNull(){
+        Mockito.when(regionalDao.getTradeDetails(Mockito.any(long.class))).thenReturn(new TradeDetails());
+        TradeDetails tradeDetails = regionalDao.getTradeDetails(12134567);
+        assertNotNull(tradeDetails);
+
+    }
+
 
 }
