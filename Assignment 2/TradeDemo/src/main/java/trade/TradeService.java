@@ -6,14 +6,16 @@ package trade;
 //Tokyo : 12345678
 public class TradeService {
 
-	public TradeService(RegionalDaoManager regionalDaoManager) {
-		this.regionalDaoManager = regionalDaoManager;
+	public TradeService(RegionalDao regionalDao) {
+		this.regionalDao = regionalDao;
 	}
 	public TradeService() {
 
 	}
 
-	private RegionalDaoManager regionalDaoManager;
+	private RegionalDao regionalDao;
+
+	private RegionalDaoManager regionalDaoManager = new RegionalDaoManager();
 	
 	public TradeDetails getTradeDetails(long tradeId) {
 		Region region = getTradeRegion(tradeId);

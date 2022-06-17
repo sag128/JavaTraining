@@ -21,16 +21,16 @@ import java.sql.SQLException;
 public class TradeServiceTest {
 
 
-    @Spy
-    private TradeService tradeService = new TradeService();
+//    @Spy
+//    private TradeService tradeService = new TradeService();
 
     @InjectMocks
-    private TradeService mockTradeService;
+    private TradeService tradeService;
 
     @Mock
     private RegionalDao regionalDao;
 
-    @Mock
+    @Spy
     private RegionalDaoManager regionalDaoManager;
 
 
@@ -75,16 +75,17 @@ public class TradeServiceTest {
     @Test
     public void getTradeDetailsShouldBeTrue() throws SQLException {
 
-
-        Mockito.when(regionalDaoManager.getRegionalDao(Region.TOKYO)).thenReturn(new TokyoDao());
+        TokyoDao mockTokyoDao = Mockito.mock(TokyoDao.class);
+        Mockito.when(mockTokyoDao.getTradeDetails(Mockito.any(long.class))).thenReturn(new TradeDetails(12345678,Region.TOKYO,0));
+//        Mockito.when(regionalDaoManager.getRegionalDao(Region.TOKYO)).thenReturn(new Mockito().an);
 //        Mockito.when(regionalDao.getDataSource().getConnection()).thenReturn(Mockito.any());
 
 
-        Mockito.when(regionalDao.getTradeDetails(123456789)).thenReturn(new TradeDetails(12345678,Region.TOKYO,1));
-        Mockito.when(mockTradeService.getTradeDetails(123456789)).thenReturn(new TradeDetails());
+//        Mockito.when(regionalDao.getTradeDetails(123456789)).thenReturn(new TradeDetails(12345678,Region.TOKYO,1));
+//        Mockito.when(mockTradeService.getTradeDetails(123456789)).thenReturn(new TradeDetails());
 
 
-        TradeDetails tradeDetails = mockTradeService.getTradeDetails(12345678);
+        TradeDetails tradeDetails = tradeService.getTradeDetails(12345678);
         TradeDetails expectedTradeDetails = new TradeDetails();
         expectedTradeDetails.setTradeId(12345678);
         expectedTradeDetails.setStatus(0);
