@@ -80,6 +80,15 @@ public class User {
     private boolean isEmp;
 
 
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", balance=" + balance +
+                ", membershipNumber=" + membershipNumber +
+                ", dob=" + dob +
+                ", isEmp=" + isEmp +
+                '}';
+    }
 }

@@ -133,6 +133,12 @@ public class CustomerTest {
     }
 
 
+    @Test
+    public void getTime() {
+        new MoviesRepository().getTime().stream().forEach(System.out::println);
+    }
+
+
 
 
 

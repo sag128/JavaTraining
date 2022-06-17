@@ -1,5 +1,5 @@
 package enums;
 
 public enum OrderStatus {
-    RETURNED,LATE
+    RETURNED,LATE_RETURN,RENTED
 }
